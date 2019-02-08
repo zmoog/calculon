@@ -1,0 +1,46 @@
+{
+  "name": "calculon",
+  "version": "0.1.0",
+  "description": "Personal Bot Assistant",
+  "main": "index.js",
+  "scripts": {
+    "integration-test": "jest --config jestconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/zmoog/calculon.git"
+  },
+  "keywords": [
+    "serverless",
+    "bot"
+  ],
+  "author": "Maurizio Branca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/zmoog/calculon/issues"
+  },
+  "homepage": "https://gitlab.com/zmoog/calculon#readme",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.19",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^10.12.23",
+    "@types/request": "^2.48.1",
+    "@types/request-promise": "^4.1.42",
+    "aws-lambda": "^0.1.2",
+    "aws-sdk": "^2.399.0",
+    "expect.js": "^0.3.1",
+    "jest": "^24.1.0",
+    "serverless": "^1.37.0",
+    "serverless-webpack": "^5.2.0",
+    "ts-jest": "^23.10.5",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3",
+    "webpack": "^4.29.3"
+  },
+  "dependencies": {
+    "dickbott": "^0.5.0",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13"
+  }
+}

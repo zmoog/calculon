@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "lib": [
+            "dom",
+            "es5",
+            "es6",
+            "es2015.promise"
+        ],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "types": [
+            "node",
+            "reflect-metadata",
+            "jest"
+        ],
+    }
+}
