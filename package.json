@@ -25,12 +25,12 @@
     "@types/jest": "^24.0.0",
     "@types/node": "^10.12.23",
     "@types/request": "^2.48.1",
-    "@types/request-promise": "^4.1.42",
+    "@types/request-promise-native": "^1.0.15",
     "aws-lambda": "^0.1.2",
     "aws-sdk": "^2.399.0",
     "expect.js": "^0.3.1",
     "jest": "^24.1.0",
-    "serverless": "^1.37.0",
+    "serverless": "^1.38.0",
     "serverless-webpack": "^5.2.0",
     "ts-jest": "^23.10.5",
     "ts-loader": "^5.3.3",
@@ -39,7 +39,7 @@
     "webpack": "^4.29.3"
   },
   "dependencies": {
-    "dickbott": "^0.5.0",
+    "dickbott": "^0.6.0",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13"
   }

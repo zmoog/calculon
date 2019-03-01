@@ -1,14 +1,12 @@
 service:
   name: calculon
-
-# Add the serverless-webpack plugin
+  # Add the serverless-webpack plugin
 plugins:
   - serverless-webpack
   # - serverless-pseudo-parameters
 
 package:
-  # individually: true
-  individually: false
+  individually: true
 
 custom: 
   region: ${opt:region, 'eu-west-1'}
@@ -18,111 +16,51 @@ provider:
   name: aws
   region: ${self:custom.region}
   runtime: nodejs8.10
-  # iamRoleStatements:
-  #   - Effect: Allow
-  #     Action: dynamodb:Scan
-  #     Resource: arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/restaurants
-  #   - Effect: Allow
-  #     Action: execute-api:Invoke
-  #     Resource: arn:aws:execute-api:#{AWS::Region}:#{AWS::AccountId}:*/*/GET/restaurants
-  #   - Effect: Allow
-  #     Action: kinesis:PutRecord
-  #     Resource: arn:aws:kinesis:#{AWS::Region}:#{AWS::AccountId}:stream/order-events
-  #   - Effect: Allow
-  #     Action: sns:Publish
-  #     Resource: arn:aws:sns:#{AWS::Region}:#{AWS::AccountId}:restaurant-notification
+  apiKeys:
+    - dialogflow
+  usagePlan:
+    quota:
+      limit: 5000
+      offset: 2
+      period: MONTH
+    throttle:
+      burstLimit: 200
+      rateLimit: 100      
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ec2:DescribeInstances
+        - ec2:StopInstances
+        - ec2:StartInstances
+      Resource: "*"
+  environment:
+    TOGGL_API_TOKEN: ${ssm:${self:service}-${opt:stage, self:provider.stage}-toggl-api-token}
+    TOGGL_WORKSPACE_ID: ${ssm:${self:service}-${opt:stage, self:provider.stage}-toggl-workspace-id}
+    TOGGL_USER_AGENT: ${ssm:${self:service}-${opt:stage, self:provider.stage}-toggl-user-agent}
+    SLACK_BOT_USER_OAUTH_ACCESS_TOKEN: ${ssm:${self:service}-${opt:stage, self:provider.stage}-slack-bot-oauth-access-token}
+    SLACK_VERIFICATION_TOKEN: ${ssm:${self:service}-${opt:stage, self:provider.stage}-slack-verification-token}
+    SLACK_DEFAULT_CHANNEL: "#general"
 
 functions:
+
+  fulfill:
+    handler: functions/fulfill.handler
+    events:
+      - http:
+          path: dialogflow/fulfill
+          method: post
+          private: true
+
   run-intent:
     handler: functions/run-intent.handler
     events:
       - schedule:
-          name: ${self:service}-${opt:stage, self:provider.stage}-Ec2StartIntent
-          rate: cron(45 6 ? * MON-FRI *)
-          enabled: false
+          name: ${self:service}-${opt:stage, self:provider.stage}-SummaryIntent
+          rate: cron(00 17 ? * MON-FRI *)
+          enabled: true
           input:
-            name: Ec2StartIntent
+            name: SummaryIntent
             entities: 
               projects:
                 - collage
                 - wolf
-    environment:
-      TOGGL_API_TOKEN: ${ssm:${self:service}-${opt:stage, self:provider.stage}-toggl-api-token}
-  # get-index:
-  #   handler: functions/get-index.handler
-  #   events:
-  #     - http:
-  #         path: /
-  #         method: get
-  #   environment:
-  #     restaurants_api: https://dbzustlmhh.execute-api.${self:custom.region}.amazonaws.com/dev/restaurants
-  #     orders_api: https://dbzustlmhh.execute-api.${self:custom.region}.amazonaws.com/dev/orders
-  #     cognito_user_pool_id: ${self:custom.config.cognito.userPoolId}
-  #     cognito_client_id: ${self:custom.config.cognito.clients.web.id}
-
-  # get-restaurants:
-  #   handler: functions/get-restaurants.handler
-  #   events:
-  #     - http:
-  #         path: /restaurants/
-  #         method: get
-  #         authorizer: aws_iam
-  #   environment:
-  #     restaurants_table: restaurants
-
-  # search-restaurants:
-  #   handler: functions/search-restaurants.handler
-  #   events:
-  #     - http:
-  #         path: /restaurants/search
-  #         method: post
-  #         authorizer: arn:aws:cognito-idp:${self:custom.region}:${self:custom.config.aws.accountId}:userpool/${self:custom.config.cognito.userPoolId}
-  #   environment:
-  #     restaurants_table: restaurants
-
-  # place-order:
-  #   handler: functions/place-order.handler
-  #   events:
-  #     - http:
-  #         path: /orders
-  #         method: post
-  #         authorizer: arn:aws:cognito-idp:${self:custom.region}:${self:custom.config.aws.accountId}:userpool/${self:custom.config.cognito.userPoolId}
-  #   environment:
-  #     order_events_stream: order-events
-
-  # nofity-restaurants:
-  #   handler: functions/nofity-restaurants.handler
-  #   events:
-  #     - stream:
-  #         arn: arn:aws:kinesis:${self:custom.region}:${self:custom.config.aws.accountId}:stream/order-events
-  #   environment:
-  #     order_events_stream: order-events
-  #     restaurant_notification_topic: arn:aws:sns:${self:custom.region}:${self:custom.config.aws.accountId}:restaurant-notification
-
-# resources:
-#   Resources:
-#     restaurantsTable:
-#       Type: AWS::DynamoDB::Table
-#       Properties:
-#         TableName: restaurants
-#         AttributeDefinitions:
-#           - AttributeName: name
-#             AttributeType: S
-#         KeySchema:
-#           - AttributeName: name
-#             KeyType: HASH
-#         ProvisionedThroughput:
-#           ReadCapacityUnits: 1
-#           WriteCapacityUnits: 1
-
-#     orderEventsStream:
-#       Type: AWS::Kinesis::Stream
-#       Properties:
-#         Name: order-events
-#         ShardCount: 1
-
-#     restaurantNotificationTopic:
-#       Type: AWS::SNS::Topic
-#       Properties:
-#         DisplayName: restaurant-notification
-#         TopicName: restaurant-notification
