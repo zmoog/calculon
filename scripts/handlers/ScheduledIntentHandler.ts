@@ -1,6 +1,5 @@
 import { IntentDispatcher, ISlackWebAPI } from "dickbott";
 import { inject, injectable } from "inversify";
-import * as _ from "lodash";
 
 
 @injectable()
