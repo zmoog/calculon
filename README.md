@@ -2,7 +2,11 @@
 
 ## Requirements
 
-- Node
+- [AWS](https://aws.amazon.com) account (for [API Gateway](https://aws.amazon.com/api-gateway/) and [AWS Lambda](https://aws.amazon.com/lambda/) functions)
+- Google Cloud Platform account (for [Dialogflow](https://dialogflow.com))
+- Node v8.10
+
+You can run the bot using the free tier on both cloud providers.
 
 
 ## AWS Systems Manager
