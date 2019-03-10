@@ -4,3 +4,4 @@ phases:
     commands:
       - npm install
       - npm test
+      - npm run deploy

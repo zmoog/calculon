@@ -4,7 +4,8 @@
   "description": "Personal Bot Assistant",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config jestconfig.json"
+    "test": "jest --config jestconfig.json",
+    "deploy": "sls deploy"
   },
   "repository": {
     "type": "git",
