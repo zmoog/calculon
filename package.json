@@ -4,7 +4,7 @@
   "description": "Personal Bot Assistant",
   "main": "index.js",
   "scripts": {
-    "integration-test": "jest --config jestconfig.json"
+    "test": "jest --config jestconfig.json"
   },
   "repository": {
     "type": "git",
@@ -35,11 +35,12 @@
     "ts-jest": "^23.10.5",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.0.2",
+    "typemoq": "^2.1.0",
     "typescript": "^3.3.3",
     "webpack": "^4.29.3"
   },
   "dependencies": {
-    "dickbott": "^0.6.0",
+    "dickbott": "^0.7.0",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13"
   }

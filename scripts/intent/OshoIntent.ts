@@ -35,7 +35,7 @@ export class OshoIntent implements Intent<OshoEntities, SlackMessage> {
                 }
             ]
         };
-        console.log("message: %j", message);
+        // console.log("message: %j", message);
         return message;
     }
 
@@ -50,7 +50,9 @@ export class OshoIntent implements Intent<OshoEntities, SlackMessage> {
     }
 }
 
-export class OshoEntities { }
+export class OshoEntities {
+    tag?: string
+}
 
 export interface OshoConfig {
     phrases: Phrase[]
