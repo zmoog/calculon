@@ -59,7 +59,7 @@ functions:
           rate: cron(00 17 ? * MON-FRI *)
           enabled: true
           input:
-            name: SummaryIntent
+            name: TogglSummaryIntent
             entities: 
               projects:
                 - collage

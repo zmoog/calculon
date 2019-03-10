@@ -5,7 +5,7 @@ import { SlackMessage } from "dickbott";
 
 
 @injectable()
-export class SummaryIntent {
+export class TogglSummaryIntent {
 
     private togglService: ITogglService;
 

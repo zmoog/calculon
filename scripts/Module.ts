@@ -2,7 +2,7 @@ import { IModule, Intent, SlackConfig, FulfillmentHandlerV2 as FulfillmentHandle
 import { interfaces } from "inversify";
 import { ITogglService, TogglConfig } from "./toggl/ITogglService";
 import { TogglService } from "./toggl/TogglService";
-import { SummaryIntent } from "./intent/SummaryIntent";
+import { TogglSummaryIntent } from "./intent/TogglSummaryIntent";
 import { ScheduledIntentHandler } from "./handlers/ScheduledIntentHandler";
 import { OshoConfig, OshoIntent } from "./intent/OshoIntent";
 import { Ec2StartIntent } from "./intent/EC2StartIntent";
@@ -36,7 +36,7 @@ export class Module implements IModule {
         container.bind<FulfillmentHandler>("FulfillmentHandler").to(FulfillmentHandler).inSingletonScope();
 
         // // Intents
-        container.bind<Intent<any, any>>("Intent").to(SummaryIntent).whenTargetNamed("SummaryIntent");
+        container.bind<Intent<any, any>>("Intent").to(TogglSummaryIntent).whenTargetNamed("TogglSummaryIntent");
         container.bind<Intent<any, any>>("Intent").to(OshoIntent).whenTargetNamed("OshoIntent");
         container.bind<Intent<any, any>>("Intent").to(Ec2StartIntent).whenTargetNamed("Ec2StartIntent");
         container.bind<Intent<any, any>>("Intent").to(Ec2StopIntent).whenTargetNamed("Ec2StopIntent");
