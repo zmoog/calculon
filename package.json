@@ -41,7 +41,7 @@
     "webpack": "^4.29.3"
   },
   "dependencies": {
-    "dickbott": "^0.7.0",
+    "dickbott": "^0.7.1",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13"
   }
