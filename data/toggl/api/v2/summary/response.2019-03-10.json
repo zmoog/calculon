@@ -1,0 +1,93 @@
+{
+    "total_grand": 17549264,
+    "total_billable": 0,
+    "total_currencies": [
+        {
+            "currency": "EUR",
+            "amount": 0
+        }
+    ],
+    "data": [
+        {
+            "id": 28041930,
+            "title": {
+                "project": "Maintenance",
+                "client": "Me",
+                "color": "0",
+                "hex_color": "#06aaf5"
+            },
+            "time": 6253264,
+            "total_currencies": [
+                {
+                    "currency": "EUR",
+                    "amount": 0
+                }
+            ],
+            "items": [
+                {
+                    "title": {
+                        "time_entry": "Chores"
+                    },
+                    "time": 6253264,
+                    "cur": "EUR",
+                    "sum": 0,
+                    "rate": 0
+                }
+            ]
+        },
+        {
+            "id": 95029662,
+            "title": {
+                "project": "Professional development",
+                "client": "Me",
+                "color": "0",
+                "hex_color": "#c7741c"
+            },
+            "time": 7308000,
+            "total_currencies": [
+                {
+                    "currency": "EUR",
+                    "amount": 0
+                }
+            ],
+            "items": [
+                {
+                    "title": {
+                        "time_entry": "Calculon: automate build & deploy"
+                    },
+                    "time": 7308000,
+                    "cur": "EUR",
+                    "sum": 0,
+                    "rate": 0
+                }
+            ]
+        },
+        {
+            "id": null,
+            "title": {
+                "project": null,
+                "client": null,
+                "color": "0",
+                "hex_color": null
+            },
+            "time": 3988000,
+            "total_currencies": [
+                {
+                    "currency": "EUR",
+                    "amount": 0
+                }
+            ],
+            "items": [
+                {
+                    "title": {
+                        "time_entry": "Breakfast"
+                    },
+                    "time": 3988000,
+                    "cur": "EUR",
+                    "sum": 0,
+                    "rate": 0
+                }
+            ]
+        }
+    ]
+}

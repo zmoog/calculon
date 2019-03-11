@@ -11,6 +11,7 @@ export class TogglSummaryIntent {
 
     constructor(
         @inject("TogglService") togglService: ITogglService) {
+            console.log(`TogglSummaryIntent::constructor: ${togglService}`);
         this.togglService = togglService;
     }
 
@@ -19,6 +20,12 @@ export class TogglSummaryIntent {
         let today = new Date();
 
         let summary = await this.togglService.summary(today, today);
+
+        if (summary.data === undefined || summary.data.length == 0) {
+            return {
+                text: "There are no entries today."
+            }
+        }
 
         let blocks = map(summary.data, (s) => {
             return {
