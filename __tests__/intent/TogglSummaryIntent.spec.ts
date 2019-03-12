@@ -53,20 +53,20 @@ describe("TogglSummaryIntent, given a summary from Toggl", () => {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*Maintenance*\n * Chores"
+                    "text": "*Maintenance*\n * Chores (2 hours)" // 1 hour and 44 minutes
                 }
             });
             expect(response.blocks[1]).to.be.eql({
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*Professional development*\n * Calculon: automate build & deploy"
+                    "text": "*Professional development*\n * Calculon: automate build & deploy (2 hours)" // 2 hours and 1 minute
                 }
             });
             expect(response.blocks[2]).to.be.eql({
                 "type": "section",
                 "text": {
-                    "type": "mrkdwn", "text": "*Unknown*\n * Breakfast"
+                    "type": "mrkdwn", "text": "*Unknown*\n * Breakfast (an hour)" // 1 hour and 6 minutes
                 }
             });
         });

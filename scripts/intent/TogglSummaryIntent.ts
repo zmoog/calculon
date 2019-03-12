@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import { ITogglService } from "../toggl/ITogglService";
 import { map, join } from "lodash";
 import { SlackMessage } from "dickbott";
+import * as moment from "moment";
 
 
 @injectable()
@@ -27,12 +28,12 @@ export class TogglSummaryIntent {
             }
         }
 
-        let blocks = map(summary.data, (s) => {
+        let blocks = map(summary.data, (entry) => {
             return {
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: `*${s.title.project||'Unknown'}*` + "\n * " + join(map(s.items, item => item.title.time_entry), "\n * ")
+                    text: `*${entry.title.project||'Unknown'}*` + "\n * " + join(map(entry.items, item => `${item.title.time_entry} (${moment.duration({millisecond: item.time}).humanize()})`), `\n * `)
                 }
             };
         });
