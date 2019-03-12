@@ -12,16 +12,18 @@ export class ScheduledIntentHandler {
 
     async handle(event: ScheduledRequest): Promise<void> {
 
-        console.log("event: %j", event)
-
+        console.log("event: %j", event);
+        
         try {
-
-            let slackMessage = await this.intentDispatcher.dispatch<any, any>(
+            
+            let message = await this.intentDispatcher.dispatch<any, any>(
                 event.name,
                 event.entities);
+                
+            console.log("message: %j", message);
 
-            if (slackMessage) {
-                await this.slackWebAPI.postMessage(slackMessage);
+            if (message) {
+                await this.slackWebAPI.postMessage(message);
             }
 
         } catch (error) {
