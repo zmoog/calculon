@@ -1,0 +1,25 @@
+{
+    "command": "hey",
+    "creator": {
+        "id": 15338496,
+        "attachable_sgid": "xyx",
+        "name": "Maurizio Branca",
+        "email_address": "mbranca@tierratelematics.com",
+        "personable_type": "User",
+        "title": "Lead Technical Specialist",
+        "bio":"Don't let your dreams be dreams",
+        "created_at": "2017-10-27T20:21:50.033Z",
+        "updated_at": "2019-02-20T08:05:58.768Z",
+        "admin": true,
+        "owner": true,
+        "client": false,
+        "time_zone": "Europe/Amsterdam",
+        "avatar_url": "https://3.basecamp-static.com/3877710/people/BAhpAwAM6g==--fd894a04b53045afacfd94cc77cf68b93b74aef2/avatar-64-x4?v=1",
+        "avatar_kind": "custom",
+        "company": {
+            "id": 1099862,
+            "name": "Tierra"
+        }
+    },
+    "callback_url": "https://3.basecamp.com/3877710/integrations/xyz/buckets/123/chats/123/lines"
+}

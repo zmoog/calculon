@@ -4,5 +4,8 @@ node_modules
 # Serverless
 .serverless
 
+# Webpack
+.webpack
+
 # misc
-setenv.sh
+set-env.sh

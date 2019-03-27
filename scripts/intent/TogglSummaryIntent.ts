@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { ITogglService } from "../toggl/ITogglService";
+import { SlackMessage, Attachment } from "dickbott";
 import { map, join } from "lodash";
-import { SlackMessage } from "dickbott";
 import * as moment from "moment";
 
 
@@ -12,35 +12,37 @@ export class TogglSummaryIntent {
 
     constructor(
         @inject("TogglService") togglService: ITogglService) {
-            console.log(`TogglSummaryIntent::constructor: ${togglService}`);
+        console.log(`TogglSummaryIntent::constructor: ${togglService}`);
         this.togglService = togglService;
     }
 
-    async execute(executionId: string, entities?: any): Promise<SlackMessage> {
+    async execute(executionId: string, entities?: TogglSummaryEntities): Promise<SlackMessage> {
 
-        let today = new Date();
+        let day = entities.day ? new Date(entities.day) : new Date();
 
-        let summary = await this.togglService.summary(today, today);
+        let summary = await this.togglService.summary(day, day);
 
         if (summary.data === undefined || summary.data.length == 0) {
             return {
-                text: "There are no entries today."
+                text: `There are no entries for ${moment(day).format("dddd, MMMM Do YYYY")}`
             }
         }
 
-        let blocks = map(summary.data, (entry) => {
+        let attachments: Attachment[] = map(summary.data, (entry) => {
             return {
-                type: "section",
-                text: {
-                    type: "mrkdwn",
-                    text: `*${entry.title.project||'Unknown'}*` + "\n * " + join(map(entry.items, item => `${item.title.time_entry} (${moment.duration({millisecond: item.time}).humanize()})`), `\n * `)
-                }
+                title: `${entry.title.project || 'Unknown'}`,
+                text: " * " + join(map(entry.items, item => `${item.title.time_entry} (${moment.duration({ millisecond: item.time }).humanize()})`), `\n * `),
+                mrkdwn_in: ["text"]
             };
         });
 
         return {
-            text: "Today on Toggl",
-            blocks: blocks
+            text: `Toggl Summary for ${moment(day).format("dddd, MMMM Do YYYY")}`,
+            attachments: attachments
         };
     }
+}
+
+export class TogglSummaryEntities {
+    day?: string
 }

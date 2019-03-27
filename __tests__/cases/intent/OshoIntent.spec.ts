@@ -3,7 +3,7 @@ import "reflect-metadata";
 import expect = require("expect.js");
 // import { DickBottEngine } from "dickbott";
 // import { Module } from "../../scripts/Module";
-import { OshoIntent } from "../../scripts/intent/OshoIntent";
+import { OshoIntent } from "../../../scripts/intent/OshoIntent";
 
 
 // let engine = new DickBottEngine();

@@ -2,30 +2,32 @@ const path = require('path');
 const slsw = require('serverless-webpack');
 
 module.exports = {
+  mode: 'development',
   entry: slsw.lib.entries,
-  // devtool: 'source-map',
   resolve: {
     extensions: [
       '.js',
-      '.jsx',
       '.json',
       '.ts',
       '.tsx'
     ]
   },
-  externals: {
-    "aws-sdk": 'aws-sdk'
-  },
   output: {
     libraryTarget: 'commonjs',
     path: path.join(__dirname, '.webpack'),
-    filename: '[name].js',
-    devtoolModuleFilenameTemplate: '[absolute-resource-path]'
+    filename: '[name].js'
   },
   target: 'node',
   module: {
     rules: [
-      { test: /\.ts(x?)$/, loader: 'ts-loader' }
-    ],
-  },
+      {
+        test: /\.ts(x?)$/,
+        use: [
+          {
+            loader: 'ts-loader'
+          }
+        ],
+      }
+    ]
+  }
 };

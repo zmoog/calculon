@@ -38,10 +38,10 @@
     "ts-node": "^8.0.2",
     "typemoq": "^2.1.0",
     "typescript": "^3.3.3",
-    "webpack": "^4.29.3"
+    "webpack": "^4.29.6"
   },
   "dependencies": {
-    "dickbott": "^0.7.2",
+    "dickbott": "^0.8.0",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13"
   }

@@ -1,5 +1,11 @@
 # Calculon
 
+## Invoke Local
+
+```bash
+$ serverless invoke local --function run-intent --data '{"name":"TogglSummaryIntent", "entities": { "day": "2019-03-25"}}'
+```
+
 ## Requirements
 
 - [AWS](https://aws.amazon.com) account (for [API Gateway](https://aws.amazon.com/api-gateway/) and [AWS Lambda](https://aws.amazon.com/lambda/) functions)
