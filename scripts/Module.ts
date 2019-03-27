@@ -8,6 +8,7 @@ import { OshoConfig, OshoIntent } from "./intent/OshoIntent";
 import { Ec2StartIntent } from "./intent/EC2StartIntent";
 import { Ec2StopIntent } from "./intent/EC2StopIntent";
 import { Ec2DescribeIntent } from "./intent/Ec2Describe";
+import { BasecampCommandHandler } from "./basecamp/BasecampCommandHandler";
 
 
 export class Module implements IModule {
@@ -34,6 +35,7 @@ export class Module implements IModule {
         // // Handlers
         container.bind<ScheduledIntentHandler>("ScheduledIntentHandler").to(ScheduledIntentHandler).inSingletonScope();
         container.bind<FulfillmentHandler>("FulfillmentHandler").to(FulfillmentHandler).inSingletonScope();
+        container.bind<BasecampCommandHandler>("BasecampCommandHandler").to(BasecampCommandHandler).inSingletonScope();
 
         // // Intents
         container.bind<Intent<any, any>>("Intent").to(TogglSummaryIntent).whenTargetNamed("TogglSummaryIntent");
