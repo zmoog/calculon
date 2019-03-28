@@ -7,3 +7,5 @@ export type BasecampCommandRequest = {
         email_address: string
     }
 }
+
+export type BasecampMessage = string;
