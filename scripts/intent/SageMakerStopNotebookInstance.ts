@@ -2,6 +2,7 @@ import { Intent, IEC2Service, SlackMessage } from "dickbott";
 import { inject, injectable } from "inversify";
 import { find, map } from "lodash";
 import { BasecampMessage } from "../basecamp/Types";
+import { ISageMakerService } from "../aws/sagemaker/ISageMakerService";
 
 
 /**
@@ -17,11 +18,25 @@ export class SageMakerStopNotebookInstance implements Intent<Entities, BasecampM
     //     Elegant: "Describe ec2 instance for dev environment"
     // }
 
-    // constructor(@inject("EC2Service") private ec2Service: IEC2Service) {
-    // }
+    constructor(@inject("SageMakerService") private sageMakerService: ISageMakerService) {
+    }
 
     async execute(executionId: string, entities: Entities): Promise<BasecampMessage> {
 
+        let notebooks = await this.sageMakerService.listNotebookInstances({ StatusEquals: "InService" });
+
+        let promises = notebooks.NotebookInstances.map(async notebook => {
+            
+            return {
+                stocazzo: true
+            }    
+
+
+        });
+
+        let res = await Promise.all(promises);
+
+        
         return "<h1>stocazzo</h1>";
         // let instances = await this.ec2Service.describeInstances({
         //     Filters: [

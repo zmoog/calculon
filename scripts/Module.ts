@@ -9,6 +9,9 @@ import { Ec2StartIntent } from "./intent/EC2StartIntent";
 import { Ec2StopIntent } from "./intent/EC2StopIntent";
 import { Ec2DescribeIntent } from "./intent/Ec2Describe";
 import { BasecampCommandHandler } from "./basecamp/BasecampCommandHandler";
+import { ISageMakerService } from "./aws/sagemaker/ISageMakerService";
+import { SageMakerService } from "./aws/sagemaker/SageMakerService";
+import { SageMakerStopNotebookInstance } from "./intent/SageMakerStopNotebookInstance";
 
 
 export class Module implements IModule {
@@ -31,6 +34,7 @@ export class Module implements IModule {
         
         // // Services
         container.bind<ITogglService>("TogglService").to(TogglService).inSingletonScope();
+        container.bind<ISageMakerService>("SageMakerService").to(SageMakerService).inSingletonScope();
 
         // // Handlers
         container.bind<ScheduledIntentHandler>("ScheduledIntentHandler").to(ScheduledIntentHandler).inSingletonScope();
@@ -43,5 +47,6 @@ export class Module implements IModule {
         container.bind<Intent<any, any>>("Intent").to(Ec2StartIntent).whenTargetNamed("Ec2StartIntent");
         container.bind<Intent<any, any>>("Intent").to(Ec2StopIntent).whenTargetNamed("Ec2StopIntent");
         container.bind<Intent<any, any>>("Intent").to(Ec2DescribeIntent).whenTargetNamed("Ec2DescribeIntent");
+        container.bind<Intent<any, any>>("Intent").to(SageMakerStopNotebookInstance).whenTargetNamed("SageMakerStopNotebookInstance");
     }
 }
